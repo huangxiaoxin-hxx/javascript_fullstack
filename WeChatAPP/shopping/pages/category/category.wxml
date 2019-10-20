@@ -10,9 +10,10 @@
     bindtap="switchTab"
     >
       {{item.name}}
+      
     </view>
   </view>
-  <scroll-view class="category-right" scroll-y scroll-with-animation="true" scroll-into-view="{{toView}}">
+  <scroll-view class="category-right" scroll-y scroll-with-animation="true" scroll-into-view="{{toView}}" bindscroll="bindtouchmove">
     <block wx:for="{{detail}}" wx:key="{{item.id}}">
       <view class="cate-box" id="{{item.id}}">
         <view class="cate-banner">

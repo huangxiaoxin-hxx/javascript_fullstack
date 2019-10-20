@@ -14,6 +14,7 @@ Page({
       { name: '淡饭', id: 'danfan' }
     ],
     curIndex: 0,
+    moveId: [0, 1, 2, 3, 4, 5],
     toView: 'guowei',
     detail: [
       {
@@ -157,11 +158,36 @@ Page({
     ]
   },
   switchTab(e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       curIndex: e.currentTarget.dataset.index,
       toView: e.currentTarget.dataset.id
     })
+    // console.log(this.data.detail.length)
+  },
+  bindtouchmove(e) {
+    // console.log(e.detail.scrollTop)
+    if(e.detail.deltaY < 0){
+      for (let j = 0; j < this.data.detail.length; j++) {
+        if (e.detail.scrollTop > j * 550 && e.detail.scrollTop < (j+1) * 550) {
+          this.setData({
+            curIndex: this.data.moveId[j]
+          })
+          console.log(e.detail.scrollTop)
+        }
+      }
+    } 
+    else {
+      for (let j = this.data.detail.length; j >= 0; j--) {
+        if (e.detail.scrollTop > j * 460  && e.detail.scrollTop < (j+1) * 460 ) {
+          this.setData({
+            curIndex: this.data.moveId[j]
+          })
+          console.log(e.detail.scrollTop)
+        }
+      }
+    }
+    
   },
   /**
    * 生命周期函数--监听页面加载
