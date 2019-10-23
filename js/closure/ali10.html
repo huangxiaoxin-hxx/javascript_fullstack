@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    li:nth-child(n) {
+      background-color: aqua;
+    }
+
+    li:nth-child(2n) {
+      background-color: pink;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+  </ul>
+  <script>
+    window.onload = function () {
+      var ul = document.querySelector('ul');
+      var li = ul.querySelectorAll('li');
+      console.log(li.length)
+      for (var i = 0; i < li.length; i++) {
+        (function (j) {
+          li[j].addEventListener("click", () => {
+            console.log(j)
+          })
+        })(i)
+      }
+    }
+  </script>
+</body>
+
+</html>
