@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p v-text="test"></p>
+    <!-- 双向数据绑定 -->
+    <input type="text" v-model="test"/>
+    <div class="wrap">
+      <div class="wrap1" v-show="deng">wrap1</div>
+      <div class="wrap2" @click="headle">wrap2</div>
+    </div>
+    <div class="wrap">
+      <ul>
+        <li v-for="list in newsList">{{list.title}}//{{list.date}}</li>
+      </ul>
+    </div>
+    <div class="wrap" v-html="content"></div>
+    <div class="wrap">
+      <div class="className" :class="isActive? 'active' : ''">v-bind</div>
+      <div class="wn" :class="[classA,classB]"></div>
+    </div>
+    
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'Hello 黄小心',
+        test:'',
+        deng: false,
+        newsList: [
+            {title: '全国各地的梯子遭到我国长城防火墙的禁用', date:'2019/5/31'},
+            {title: '韩国瑜：准备承担2020年重担，让鬼混的民进党下台', date:'2019/6/1'},
+            {title: '冠心病“救命药”单片涨价近11倍 药企：换了包装', date:'2019/6/2'},
+            {title: '长春一天集齐雷电冰雹暴雨：有路段积水漂车，部分航班取消', date:'2019/6/3'}
+          ],
+          content: '<p>我爱你中国</p>',
+          isActive: true,
+          className: true,
+          classA: 'aaaa',
+          classB: 'bbbb'
+      },
+      methods:{
+        headle: function(){
+          console.log('yes');
+        }
+      },
+      
+      beforeCreate: function () {
+        console.group('------beforeCreate创建前状态------');
+        console.log("%c%s", "color:red", "el     : " + this.$el); //undefined
+        console.log("%c%s", "color:red", "data   : " + this.$data); //undefined 
+        console.log("%c%s", "color:red", "message: " + this.message)
+      },
+      created: function () {
+        console.group('------created创建完毕状态------');
+        console.log("%c%s", "color:red", "el     : " + this.$el); //undefined
+        console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化 
+        console.log("%c%s", "color:red", "message: " + this.message); //已被初始化
+      },
+      beforeMount: function () {
+        console.group('------beforeMount挂载前状态------');
+        console.log("%c%s", "color:red", "el     : " + (this.$el)); //已被初始化
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化  
+        console.log("%c%s", "color:red", "message: " + this.message); //已被初始化  
+      },
+      mounted: function () {
+        console.group('------mounted 挂载结束状态------');
+        console.log("%c%s", "color:red", "el     : " + this.$el); //已被初始化
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化
+        console.log("%c%s", "color:red", "message: " + this.message); //已被初始化 
+      },
+      beforeUpdate: function () {
+        console.group('beforeUpdate 更新前状态===============》');
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      updated: function () {
+        console.group('updated 更新完成状态===============》');
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      beforeDestroy: function () {
+        console.group('beforeDestroy 销毁前状态===============》');
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      destroyed: function () {
+        console.group('destroyed 销毁完成状态===============》');
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message)
+      }
+    })
+  </script>
+</body>
+
+</html>
