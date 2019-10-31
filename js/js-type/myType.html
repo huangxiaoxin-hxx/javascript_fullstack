@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function isType(type, value) {
+      return Object.prototype.toString.call(value) === `[object ${type}]`;
+    }  
+    var isString = isType.bind(null,'String')
+    // 有没有什么东西 能把所有函数的第一个参数 固定住
+    console.log(isString('123'));
+
+    console.log(isType('String', '123'));
+    console.log(isType('Function', () => {}));
+    console.log(isType('String', 123));
+
+    // 函数式编程  过程抽象
+    // 面向对象  数据抽象
+
+  </script>
+</body>
+</html>
