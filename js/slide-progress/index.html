@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding: 10px;
+      background-color: #aaa;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background-color: rgba(0, 0, 0, .3);
+      position: relative;
+      top: 100px;
+      border-radius: 25px;
+    }
+
+    .progress,
+    .progress-button {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: red;
+      border-radius: 25px;
+    }
+
+    .progress-button {
+      width: 15px;
+      height: 15px;
+      border: 4px solid #ffffff;
+      border-radius: 50%;
+      box-sizing: border-box;
+      background-color: red;
+      top: -5px;
+      margin-left: -2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress1">
+  </div>
+
+  <script>
+    
+    class Progress {
+      constructor(selector, option) {
+        const { onProgressChange } = option;
+        this.onProgressChange = onProgressChange;
+        this.progressBar = document.createElement('div');
+        this.progress = document.createElement('div');
+        this.progressButton = document.createElement('div');
+        this.progressBar.classList.add('progress-bar');
+        this.progress.classList.add('progress');
+        this.progressButton.classList.add('progress-button');
+        this.progressBar.appendChild(this.progress);
+        this.progressBar.appendChild(this.progressButton);
+        document.querySelector(selector).appendChild(this.progressBar);
+        this.addEvent();
+      }
+      addEvent() {
+        this.downX = 0;
+        this.buttonLeft = 0;
+        this.progressButton.addEventListener('touchstart', (e) => {
+          const touch = e.touches[0];
+          this.downX = touch.clientX;
+          this.buttonLeft = parseInt(this.progressButton.style.left || 0);
+        })
+        this.progressButton.addEventListener('touchmove', (e) => {
+          const touch = e.touches[0];
+          let moveX = touch.clientX - this.downX + this.buttonLeft;
+          if (moveX > this.progressBar.offsetWidth - 2) {
+            moveX = this.progressBar.offsetWidth - 2
+          } else if (moveX < 0) {
+            moveX = 0;
+          }
+          //通知回调
+          this.onProgressChange((moveX / this.progressBar.offsetWidth) * 100)
+          this.progressButton.style.left = moveX + 'px';
+          this.progress.style.width = (moveX / this.progressBar.offsetWidth) * 100 + '%'
+        })
+      }
+    }
+    new Progress('.progress1', {
+      onProgressChange: function (percent) {
+        console.log('percent',percent)
+      }
+    })
+  </script>
+</body>
+
+</html>
