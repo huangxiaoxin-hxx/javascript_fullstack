@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="">
+  <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_86d58ae1.png" alt="">
+  <svg width='200' height='200' style='transform: rotate(-90deg)'>
+    <circle r='45' cx='100' cy='100' stroke-width='3' stroke='rgba(229, 233, 242)' fill='none'></circle>
+    <circle r='45' cx='100' cy='100' stroke-width='3' stroke='red' fill='none' stroke-dasharray='282.7'
+      stroke-dashoffset='80' class="redCircle"></circle>
+    <!-- 282.7 -->
+  </svg>
+</body>
+<script>
+  rotate()
+  let percent = 0;
+  let len = 2 * Math.PI * 45;
+  let offset = ((100 - percent) * len) / 100;
+  document.querySelector('.redCircle').setAttribute('stroke-dashoffset', offset)
+</script>
+
+</html>
