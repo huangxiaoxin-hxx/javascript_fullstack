@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Father1 from '@/components/view/demo1/father'
 import Father2 from '@/components/view/demo2/father'
 import Father3 from '@/components/view/demo3/father'
+import Father4 from '@/components/view/demo4/father'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/d3',
       name: 'Father3',
       component: Father3
+    },
+    {
+      path: '/d4',
+      name: 'Father4',
+      component: Father4
     }
   ]
 })

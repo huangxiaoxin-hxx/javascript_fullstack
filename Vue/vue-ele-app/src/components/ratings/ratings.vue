@@ -179,7 +179,9 @@ export default {
 li
   list-style none
 .ratings
-  height 500px
+  position absolute
+  top 174px
+  bottom 0
   overflow hidden
 .ratings-content
   height 100%

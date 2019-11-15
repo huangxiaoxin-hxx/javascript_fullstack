@@ -1,6 +1,6 @@
 <template>
   <div class="seller">
-    <div class="seller-content">
+    <div class="seller-content" ref="sellerWrapper">
       <div>
         <div class="overview">
           <h1 class="title">{{seller.name}}</h1>
@@ -54,7 +54,16 @@
           </ul>
         </div>
         <div class="split"></div>
-        <div class="pics"></div>
+        <div class="pics">
+          <h1 class="title">商家实景</h1>
+          <div class="pic-wrapper">
+            <ul class="pic-list">
+              <li class="pic-item">
+                <img src="" alt="">
+              </li>
+            </ul>
+          </div>
+        </div>
         <div class="split"></div>
         <div class="info"></div>
       </div>
@@ -63,6 +72,7 @@
 </template>
 
 <script>
+import BScroll from 'better-scroll'
 export default {
   props: {
     seller: {
@@ -73,6 +83,19 @@ export default {
     return {
       classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
       isCollect: false
+    }
+  },
+  created () {
+    this.$nextTick(() => {
+      this._initScroll()
+    })
+  },
+  methods:{
+    _initScroll () {
+      this.ratingScroll = new BScroll(this.$refs.sellerWrapper, {
+        click: true
+      })
+      console.log(this.ratingScroll)
     }
   }
 }
@@ -94,6 +117,12 @@ li
   border-bottom 1px solid rgba(7,17,27,.1)
   background #f3f5f7
 .seller 
+  position absolute
+  top 174px
+  bottom 0
+  overflow hidden
+  .seller-content
+    height 100%
   .overview
     position relative
     padding 18px
@@ -231,4 +260,11 @@ li
           line-height 16px
           font-size 12px
           color #07111b
+  .pics
+    padding 18px
+    .title
+      margin-bottom 12px
+      line-height 14px
+      color #07111b
+      font-size 14px
 </style>
