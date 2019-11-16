@@ -16,13 +16,13 @@
             <span class="text">月售{{seller.sellCount}}单</span>
           </div>
           <ul class="remark">
-            <li class="block">
+            <li class="block on">
               <h2>起送价</h2>
               <div class="content">
                 <span class="stress">{{seller.minPrice}}</span>元
               </div>
             </li>
-            <li class="block">
+            <li class="block on">
               <h2>商家配送</h2>
               <div class="content">
                 <span class="stress">{{seller.deliveryPrice}}</span>元
@@ -56,16 +56,23 @@
         <div class="split"></div>
         <div class="pics">
           <h1 class="title">商家实景</h1>
-          <div class="pic-wrapper">
+          <div class="pic-wrapper" ref="picWrapper">
             <ul class="pic-list">
-              <li class="pic-item">
-                <img src="" alt="">
+              <li class="pic-item" v-for="pic of seller.pics" :key="pic">
+                <img :src="pic" alt="">
               </li>
             </ul>
           </div>
         </div>
         <div class="split"></div>
-        <div class="info"></div>
+        <div class="info">
+          <h1 class="title border-1px">
+            商家信息
+          </h1>
+          <ul>
+            <li class="info-item" v-for="info of seller.infos" :key="info">{{info}}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -95,7 +102,13 @@ export default {
       this.ratingScroll = new BScroll(this.$refs.sellerWrapper, {
         click: true
       })
+      this.picScroll = new BScroll(this.$refs.picWrapper, {
+        click: true,
+
+        scrollX: true
+      })
       console.log(this.ratingScroll)
+      console.log(this.picScroll)
     }
   }
 }
@@ -171,7 +184,8 @@ li
       .block
         flex 1
         text-align center
-        border-right 1px solid rgba(7,17,27,.1)
+        &.on
+          border-right 1px solid rgba(7,17,27,.1)
         h2
           margin-bottom 4px
           line-height 10px
@@ -267,4 +281,48 @@ li
       line-height 14px
       color #07111b
       font-size 14px
+    .pic-wrapper
+      width 340px
+      overflow hidden
+      white-space nowrap
+      .pic-list
+        width 498px
+        font-size 0
+        .pic-item
+          display inline-block
+          margin-right 6px
+          width 120px
+          height 90px
+          img
+            width 100%
+            height 100%
+  .info
+    padding 18px 18px 0
+    color #07111b
+    .title
+      padding-bottom 12px
+      line-height 14px
+      position relative
+      font-size 14px
+      &:after
+        display block
+        position absolute
+        left 0
+        bottom 0
+        width 100%
+        border-top 1px solid rgba(7,17,27,.1)
+        content " "
+    .info-item
+      padding 16px 12px
+      line-height 16px
+      position relative
+      font-size 12px
+      &:after
+        display block
+        position absolute
+        left 0
+        bottom 0
+        width 100%
+        border-top 1px solid rgba(7,17,27,.1)
+        content " "
 </style>

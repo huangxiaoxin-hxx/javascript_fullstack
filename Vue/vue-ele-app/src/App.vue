@@ -44,6 +44,12 @@ export default {
 
 <style lang="stylus">
 @import './common/stylus/mixin'
+*{
+  margin 0
+  padding 0
+  font-size 100%
+  font-weight normal
+}
 .tab
   display flex
   height 40px

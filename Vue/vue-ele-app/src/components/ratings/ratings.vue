@@ -83,7 +83,7 @@
                   <span class="icon-thumb_up" v-if="item.rateType==0"></span>
                   <span class="item" v-for="(food, indexfood) in item.recommend" :key="indexfood">{{food}}</span>
                 </div>
-                <div class="time">{{item.rateTime}}</div>
+                <div class="time">{{ratingTime[index]}}</div>
               </div>
             </li>
           </ul>
@@ -140,8 +140,9 @@ export default {
       })
       return ratingcount
     },
-    goodRatingShow() {
-
+    ratingTime () {
+      let date = this.formatDate(this.ratings)
+      return date
     }
   },
   methods: {
@@ -153,6 +154,22 @@ export default {
         click: true
       })
       console.log(this.ratingScroll)
+    },
+    formatDate (date) {
+      let dateTime = []
+      for(let i = 0; i < date.length; i++) {
+          date[i].rateTime = new Date(date[i].rateTime);
+          var y=date[i].rateTime.getFullYear();
+          var m=date[i].rateTime.getMonth()+1;
+          var d=date[i].rateTime.getDate();
+          var h=date[i].rateTime.getHours();
+          var m1=date[i].rateTime.getMinutes();
+          var s=date[i].rateTime.getSeconds();
+          m = m<10?("0"+m):m;
+          d = d<10?("0"+d):d;
+          dateTime[i] = y+"-"+m+"-"+d+" "+h+":"+m1+":"+s
+      }
+        return dateTime;
     }
   }
 }
@@ -160,6 +177,13 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
+*
+  margin 0
+  padding 0
+  border 0
+  font-size 100%
+  font-weight normal
+  vertical-align baseline
 .star.star-24 .star-item.on
   background-image url('./xingxinghuang.png')
 .star.star-24 .star-item.off

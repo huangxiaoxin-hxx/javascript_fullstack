@@ -95,6 +95,12 @@ export default {
 
 <style lang='stylus' scoped>
 @import '../../common/stylus/mixin'
+*{
+  margin 0
+  padding 0
+  font-size 100%
+  font-weight normal
+}
 .header
   position relative
   color #fff
