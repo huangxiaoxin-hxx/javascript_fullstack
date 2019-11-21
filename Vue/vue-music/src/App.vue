@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- 头部 -->
     <v-header>
       <i class="icon" slot="left-icon">&#xe692;</i>
       <span slot="content">我的音乐</span>
@@ -7,17 +8,23 @@
         <i class="icon">&#xe63c;</i>
       </router-link>
     </v-header>
-    <!-- 头部 -->
-    <!-- <router-view/> -->
+    <!-- tab -->
+    <v-tab></v-tab>
+    <router-view/>
+    <v-sidebar></v-sidebar>
   </div>
 </template>
 
 <script>
 import header from '@/components/header'
+import sidebar from '@/components/sidebar'
+import tab from '@/components/tab'
 export default {
   name: 'App',
   components: {
-    'v-header': header
+    'v-header': header,
+    'v-sidebar': sidebar,
+    'v-tab': tab
   }
 }
 </script>
