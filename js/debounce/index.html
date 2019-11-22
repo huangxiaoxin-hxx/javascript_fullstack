@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+  <style>
+    #container {
+      width: 100%;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <button id="buyNow">buy</button>
+  <script>
+    const container = document.getElementById('container');
+    const buyNow = document.getElementById('buyNow')
+    let count = 0;
+    function debounce(fn, delay) {
+      let Timer
+      // onClick onMouseMove 调用的
+      return function (...arg) {
+        if (Timer) {
+          clearTimeout(Timer)
+        }
+        Timer = setTimeout(() => {
+          fn.apply(this, arg)
+        }, delay);
+      }
+    }
+    function buy(e) {
+      console.log('别点了',e)
+    }
+    function getUser() {
+      container.innerHTML = count++
+    }
+    // 高阶函数 输入是函数，输出也是函数
+    container.onmousemove = debounce(getUser, 1000)
+    buyNow.onclick = debounce(buy, 1000)
+  </script>
+</body>
+
+</html>
