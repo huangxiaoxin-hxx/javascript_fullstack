@@ -38,7 +38,7 @@ export function fetchGet(url, param) {
 export default {
   // 用户登录
   Login(params) {
-    return fatchGet('/login', params)
+    return fetchGet('/login', params)
   },
   // banners
   BannerList () {
@@ -48,7 +48,17 @@ export default {
   DiscLists (params) {
     return fetchGet('/top/playlist', params)
   },
+  // 热搜记录
   HotSearchKey () {
     return fetchGet('/search/hot')
+  },
+  // 歌曲搜索
+  MusicSearch (params) {
+    return fetchGet('/search', params)
+  },
+  // 根据id获取歌曲的url
+  MusicUrl (id) {
+    return fetchGet('/song/url', {id})
   }
+
 }

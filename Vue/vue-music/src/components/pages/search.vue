@@ -1,10 +1,10 @@
 <template>
   <div class="search">
     <div class="search-box-wrapper">
-      <v-search-box @query="onQueryChange"></v-search-box>
+      <v-search-box @query="onQueryChange" ref="searchBox"></v-search-box>
     </div>
     <!-- 热门搜索和历史记录 -->
-    <div class="shortcut-wrapper">
+    <div class="shortcut-wrapper" v-show="!query">
       <v-scroll class="shortcut" :data="shortcut" ref="shortcut">
         <div>
           <!-- 热门搜索 -->
@@ -20,13 +20,17 @@
           <div class="search-history">
             <h1 class="title">
               <span class="text">搜索历史</span>
-              <span class="clear"><i class="icon">&#xe612;</i></span>
+              <span class="clear" @click="deleteAllSearchHistory"><i class="icon">&#xe612;</i></span>
             </h1>
             <!-- 搜索历史列表 -->
-            <v-searchList :searches="searchHistory"></v-searchList>
+            <v-searchList :searches="searchHistory" @select="saveSearch" @delete="deleteSearchHistory"></v-searchList>
           </div>
         </div>
       </v-scroll>
+    </div>
+    <!-- result 搜索结果 -->
+    <div class="search-result" v-show="query">
+      <v-suggest :query="query" @select="saveSearch" @listScroll="blurInput" ref="suggest"></v-suggest>
     </div>
   </div>
 </template>
@@ -37,6 +41,8 @@ import scroll from '@/components/scroll'
 import api from '@/api'
 import searchList from '@/components/searchList'
 import { mapGetters } from 'vuex'
+import { searchMixin } from '@/common/mixin'
+import suggest from '@/components/suggest'
 export default {
   data () {
     return {
@@ -47,12 +53,11 @@ export default {
   components: {
     'v-search-box': searchBox,
     'v-scroll': scroll,
-    'v-searchList': searchList
+    'v-searchList': searchList,
+    'v-suggest': suggest
   },
   methods: {
-    onQueryChange (e) {
-      console.log(e)
-    },
+    // 得到热搜数据
     _getHotKey () {
       api.HotSearchKey().then((res) => {
         console.log(res)
@@ -69,7 +74,8 @@ export default {
     ...mapGetters([
       'searchHistory'
     ])
-  }
+  },
+  mixins: [searchMixin]
 }
 </script>
 
@@ -116,4 +122,9 @@ export default {
             .icon
               font-size 18px
               color hsla(0, 0%, 100%, 0.3)
+  .search-result
+    position fixed
+    width 100%
+    top px2rem(360px)
+    bottom 0
 </style>
