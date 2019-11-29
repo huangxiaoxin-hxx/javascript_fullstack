@@ -64,6 +64,3 @@ var BreadthFirstUnRecur = function(node) {
 }
 
 // BreadthFirstUnRecur(tree)
-
-let a = 8*1000+10*500+152*100+77*50+10*418
-console.log(a)
