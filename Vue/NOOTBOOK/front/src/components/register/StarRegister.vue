@@ -40,11 +40,11 @@ export default {
     },
     register () {
       if (this.nickname.trim() === '' || this.username.trim() === '' || this.userpwd.trim() === '') {
-        this.$Toast('昵称、账号或密码不能为空')
+        this.$toast('昵称、账号或密码不能为空')
         return
       }
-      this.$http({
-        methods: 'post',
+      this.$http ({
+        method: 'post',
         url: 'http://localhost:3000/users/userRegister',
         data: {
           nickname: this.nickname.trim(),
@@ -53,6 +53,12 @@ export default {
         }
       })
       .then(res => {
+        // console.log(res)
+        if (res.data.code === '200') {
+          this.$router.push({path: '/StarLogin'})
+        } else {
+          this.$toast(res.data.mess)
+        }
       })
     }
   }

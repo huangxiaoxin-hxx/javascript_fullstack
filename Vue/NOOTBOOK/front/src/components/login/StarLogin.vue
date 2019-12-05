@@ -28,7 +28,7 @@ export default {
   methods: {
     login () {
       if (this.username.trim() === '' || this.userpwd.trim() === '') {
-        this.$Toast('账号或密码不能为空')
+        this.$toast('账号或密码不能为空')
         return
       }
       this.$http({
@@ -45,7 +45,7 @@ export default {
           sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))
           this.$router.push({ path: '/noteClass' })
         } else {
-          this.$Toast(res.data.mess)
+          this.$toast(res.data.mess)
         }
       })
       .catch((err) => {
