@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+<iframe src="" frameborder="0"></iframe>
+<iframe src="" frameborder="0"></iframe>
+  <script>
+    function fn() {
+      console.log(this.length)
+    }
+    fn();
+    // window.length -> iframe 节点的个数
+
+    var bar = {
+      length: 5,
+      fn1: function() {
+        fn()
+        // 每一个 普通函数都可以用的一个对象
+        // 传进来的所有参数
+        arguments[0]()
+      }
+    }
+    var bar1 = {
+      length: 6
+    }
+    // 返回 绑定好this的函数
+    console.log(bar.fn1.bind(bar1))
+    const res = bar.fn1.bind(bar1)
+    res(fn, 123456, 1) //2, 3
+    // obj.fn < call/apply/bind < new
+
+
+
+    foo(1, 2, 3)
+    function foo() {
+      // 类数组对象
+      // 1: arguments[0] arguments[1]
+      // 2: length
+      console.log(arguments)
+      // 放大 2倍
+      // arguments 没有 map
+      // 类数组 -> 真数组
+      // Array.from()
+      var arr1 = Array.from(arguments)
+      // 借用数组的 slice 方法
+      var arr2 = Array.prototype.slice.call(arguments)
+      //
+      let arr3 = [...arguments]
+      console.log(arguments)
+      console.log(typeof arguments.map)
+    }
+    const nodes =document.querySelectorAll('iframe')
+    console.log(nodes)
+
+    function Person (age) {
+      this.age = age;
+    }
+    Person.prototype.ruduceAge = function() {
+      return this.age - 10
+    }
+    var p = new Person(20)
+    console.log(p.ruduceAge())
+
+    var q = {age: 30}
+    
+    console.log(Person.prototype.ruduceAge.call(q))
+  </script>
+</body>
+
+</html>
