@@ -69,11 +69,18 @@ let findNoteDetailById = function (id) {
   return allServies.query(_sql)
 }
 
+// 插入文章信息到数据库中,发表笔记
+let insertNote = function (options) {
+  let _sql = `insert into note set c_time=?,m_time=?,note_content=?,head_img=?,title=?,note_type=?,useId=?,nickname=?;`
+  return allServies.query(_sql,options)
+}
+
 module.exports = {
   getAllUsers,
   userLogin,
   findUser,
   insertUser,
   findNoteListByType,
-  findNoteDetailById
+  findNoteDetailById,
+  insertNote
 }

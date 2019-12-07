@@ -1,5 +1,6 @@
 const router = require('koa-router')()
 const userService = require('../controllers/mySqlConfig')
+const utils = require('../controllers/utils.js')
 
 router.prefix('/users') //路由前缀
 
@@ -174,3 +175,42 @@ router.post('/findNoteDetailById', async(ctx, next) => {
   })
 })
 module.exports = router
+
+// 发布文章，向数据库插入文章数据
+router.post('/insertNote', async(ctx, next) => {
+  let c_time = utils.getNoteFormatDate()
+  let m_time = utils.getNoteFormatDate()
+  let note_content = ctx.request.body.note_content
+  let head_img = ctx.request.body.head_img
+  let title = ctx.request.body.title
+  let note_type = ctx.request.body.note_type
+  let useId = ctx.request.body.useId
+  let nickname = ctx.request.body.nickname
+
+  console.log(useId)
+  await userService.insertNote([c_time, m_time, note_content, head_img, title, note_type, useId, nickname])
+  .then(async (res) => {
+    let r = ''
+    if (res.affrctedRows != 0) {
+      r = 'ok'
+      ctx.body = {
+        code: '200',
+        data: r,
+        mess: '发表成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '80000',
+        data: r,
+        mess: '发表失败'
+      }
+    }
+  })
+  .catch((err) => {
+    ctx.body = {
+      code:'500',
+      data: err
+    }
+  })
+})
