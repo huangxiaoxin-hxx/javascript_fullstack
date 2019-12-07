@@ -112,12 +112,12 @@ router.post('/userRegister', async(ctx, next) => {
   })
 })
 
-// // 根据分类名称查找对应的笔记列表
+// 根据分类名称查找对应的笔记列表
 router.post('/findNoteListBytype', async(ctx, next) => {
   let note_type = ctx.request.body.note_type
   await userService.findNoteListByType(note_type)
   .then((res) => {
-    console.log(res)
+    // console.log(res)
     let r = ''
     if (res.length) {
       r = 'ok'
@@ -137,10 +137,40 @@ router.post('/findNoteListBytype', async(ctx, next) => {
   })
   .catch((err) => {
     ctx.body = {
-      code:500,
+      code:'500',
 
     }
   }) 
 })
 
+// 根据id查找对应的笔记详情
+router.post('/findNoteDetailById', async(ctx, next) => {
+  let id = ctx.request.body.id
+  await userService.findNoteDetailById(id)
+  .then(async (res) => {
+    // console.log(res)
+    let r = ''
+    if(res.length) {
+      r = 'ok'
+      ctx.body = {
+        code: '200',
+        data: res[0],
+        mess: '查找成功'
+      }
+    } else {
+      r = 'error'
+      ctx.body = {
+        code: '404',
+        data: r,
+        mess: '查找失败'
+      }
+    }
+  })
+  .catch((err) => {
+    ctx.body = {
+      code:'500',
+      data: err
+    }
+  })
+})
 module.exports = router

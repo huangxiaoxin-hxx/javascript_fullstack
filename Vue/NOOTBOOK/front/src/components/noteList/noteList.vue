@@ -1,7 +1,7 @@
 <template>
   <div class="note-list">
     <ul>
-      <li v-for="(item, index) in noteList" :key="index">
+      <li v-for="(item, index) in noteList" :key="index" @click="noteDetail(item.id)">
         <div class="img">
           <img :src="item.head_img" alt="">
         </div>
@@ -49,6 +49,9 @@ export default {
           this.$toast('查询不成功')
         }
       })
+    },
+    noteDetail(id) {
+      this.$router.push({path: '/noteDetail' ,query:{'id': id}})
     }
   }
 }
