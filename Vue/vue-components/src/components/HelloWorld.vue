@@ -9,7 +9,7 @@
     <!-- <div @click="oSure">
       <i-button size="default" ref="sure">确认</i-button>
     </div> -->
-    <i-button size="default" ref="sure" @click.native="onSure" @mess="getMess">确认</i-button>
+    <i-button size="default" ref="sure" @click.native="showToast" @mess="getMess">确认</i-button>
   </div>
 </template>
 
@@ -32,8 +32,8 @@ export default {
     btn2() {
       console.log('2')
     },
-    onSure() {
-      this.$refs.sure.sureClick()
+    showToast() {
+      this.$toast('网络异常')
     },
     getMess(data) {
       this.msg = data

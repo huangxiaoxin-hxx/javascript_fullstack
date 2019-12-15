@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body {
+      background: orange;
+      text-align: center;
+      color: #fff;
+      margin: 10%;
+    }
+    p {
+      font-size: 2rem;
+    }
+    
+  </style>
+</head>
+<body>
+  <div>
+    <h1>
+      welcome to socket
+    </h1>
+    <p>hello world</p>
+    <p id="info"></p>
+
+    <input type="text" id="send_info" value="" placeholder="请输入你想说的话">
+    <button type="button" id="btn">发送</button>
+  </div>
+  <script>
+      var socket = io()
+      document.getElementById('btn').onclick = function () {
+        socket.emit('link_to_server', document.getElementById('send_info').value)
+        document.getElementById('send_info').value = ''
+      }
+      socket.on('link_to_client', function(msg) {
+        document.getElementById('info').append(`${msg}`)
+      })
+  </script>
+</body>
+</html>

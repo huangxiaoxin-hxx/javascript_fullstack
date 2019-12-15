@@ -72,5 +72,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('14', 'aa', 'aa', 'aa');
+INSERT INTO `users` VALUES ('1', '18079143737', '3232556', '黄小心');
 INSERT INTO `users` VALUES ('15', 'cat', '123', '十三哥');
