@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function sum(a, b, c) {
+      return a + b + c;
+    }
+    // sum(1, 2, 3)
+    // 对 sum 这个函数的柯里化
+    // bind 返回的一个函数
+    var currySum = sum.bind(null, 1, 2)
+    var res = currySum(3)
+    console.log(res)
+
+    function matchStr (reg, str) {
+      return reg.test(str)
+    }
+    console.log(matchStr(/\s+/g, 'a b'))
+    console.log(matchStr(/\s+/g, 'acb '))
+
+    const hashWhiteSpace = matchStr.bind(null, /\s+/g)
+    console.log(hashWhiteSpace('a b c'))
+    console.log(hashWhiteSpace('ac '))
+
+    const hasNum = matchStr.bind(null, /[0-9]+/g)
+    console.log(hasNum('123asd'))
+    console.log(hasNum('asd'))
+
+    function type(type, value) {
+      return Object.prototype.toString.call(value) === `[object ${type}]`
+    }
+    const isArray = type.bind(null, 'Array')
+    console.log(isArray([1,2,3]))
+  </script>
+</body>
+</html>
