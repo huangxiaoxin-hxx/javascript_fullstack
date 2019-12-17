@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.min.js"></script>
+  <script>
+    function sum(a, b, c) {
+      return a + b + c;
+    }
+    // console.log(sum.length)
+    const sumCurried = _.curry(sum)
+    const add10 = sumCurried(10)
+    const add20 = add10(10)
+    console.log(add20(10))
+    console.log(sumCurried(10,20,30,40))
+
+    // 如果得到的参数与函数参数一致则执行函数，否则返回一个函数 继续接收参数
+
+    function myCurry(func) {
+      let len = func.length
+      const _curry = function(...args) {
+        if(args.length >= len) {
+          return func(...args)
+        }
+        return function(...parms) {
+          let arr = [...args,...parms]
+          if(arr.length >= len) {
+            return func(...arr)
+          } else {
+            return _curry(...arr)
+          }
+        }
+      }
+      return _curry
+    }
+    const sum1 = myCurry(sum)
+    console.log(sum1(10,10,10,10))
+  </script>
+</body>
+</html>
