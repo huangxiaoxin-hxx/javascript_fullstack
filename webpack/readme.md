@@ -21,3 +21,19 @@ autoprefixer 进行浏览器部分兼容补全
 
 # 抽取样式将css 单独打包
 npm i mini-css-extract-plugin --save-dev
+
+# 压缩打包
+ - 压缩css (optimize-css-assets-webpack-plugin)
+ - 压缩 js (uglifyjs-webpack-plugin)
+
+ # 为 css js 文件添加hash值，防止缓存
+
+ # html打包
+  - html-webpack-plugin
+
+# 清理目录
+ - clean-webpack-plugin
+
+# webpack处理图片和优化
+ - file-loader
+ - image-webpack-loader
