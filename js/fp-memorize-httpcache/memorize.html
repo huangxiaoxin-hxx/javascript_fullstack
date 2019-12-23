@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let mapadd = new Map()
+    function add(a) {
+      // 缓存里面 有没有
+      if (mapadd.has(a)) return mapadd.get(a)
+      let res =  a + 30
+      mapadd.set(a, res)
+      return res
+    }
+
+    let mapreduce = new Map()
+    function reduce(c, d) {
+      let key = JSON.stringify(Array.from(arguments))
+      if(mapreduce.has(key)) return mapreduce.get(key)
+      let res = c - d
+      mapreduce.set(key, res)
+      return res
+    }
+
+    // add reduce 相同的：缓存的过程, 不同的：干的活不一样,函数
+    function sum(a, b, c) {
+      return a + b + c
+    }
+
+    function count (a, b, c) {
+      return a * b * c
+    }
+
+    // 过程抽象
+    // 体现在：高阶函数
+    function memorize(fn) {
+      let cache = new Map()
+      // fn -> 具有缓存功能的 fn
+      return (...args) => {
+        // 这个函数 要具有缓存功能
+        let key = JSON.stringify(Array.from(args))
+        if (cache.has(key)) {
+          console.log('from cache')
+          return cache.get(key)
+        }
+        // 计算
+        let res = fn(...args)
+        cache.set(key, res)
+        return res
+      }
+    }
+
+    let cSum = memorize(sum)
+    let cCount = memorize(count)
+    console.log(cSum(1,2,4))
+    console.log(cSum(1,2,4))
+    console.log(cCount(1,2,4))
+    console.log(cCount(1,2,4))
+  </script>
+</body>
+</html>
