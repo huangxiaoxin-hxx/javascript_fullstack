@@ -19,7 +19,7 @@
 let myKoa = require('./lib/application')
 let app = new myKoa()
 
-app.use((ctx) => {
+app.use((ctx,next) => {
   // console.log(ctx.req.url)
   // console.log(ctx.request.req.url)
   // console.log(ctx.response.req.url)
@@ -31,7 +31,19 @@ app.use((ctx) => {
     name: 'hxx',
     age: '18'
   }
-  console.log(ctx.body)
+  next()
+})
+
+app.use((ctx, next) => {
+  ctx.body = 'hello'
+  next()
+  console.log(2)
+})
+
+app.use((ctx, next) => {
+  console.log(3)
+  next()
+  console.log(4)
 })
 
 app.listen(3000)
