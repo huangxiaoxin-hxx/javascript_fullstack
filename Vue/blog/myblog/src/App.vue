@@ -1,8 +1,25 @@
 <template>
   <div id="app">
+    <!-- 头部 -->
+    <Nav></Nav>
     <router-view />
   </div>
 </template>
+
+<script lang="ts">
+import {Vue, Component} from 'vue-property-decorator'
+import Nav from "@/components/Nav.vue";
+
+@Component({
+  components:{
+    Nav
+  }
+})
+
+export default class App extends Vue {
+
+}
+</script>
 
 <style lang="less">
 #app {
