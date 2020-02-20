@@ -3,6 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import { throws } from 'assert'
 // import App from './App'
+import Lifecycle from './components/Lifecycle'
+import CommentVs from './components/CommentVs'
+import PureComponentTest from './components/PureComponentTest'
 
 // class App extends React.Component {
 //   render () {
@@ -156,4 +159,5 @@ class FeatureReturnFraments extends React.Component {
   }
 }
 
-ReactDOM.render(<React16/>, document.querySelector('#root'))
+
+ReactDOM.render(<PureComponentTest body='vue is very good' author='youyuxi'/>, document.querySelector('#root'))
