@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react'
 import { Form, Input, Button, Card, Message } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './index.less'
-import { UserOutlined,LockOutlined } from '@ant-design/icons'
-import { MenuItem } from 'rc-menu';
-import Particles from 'react-particles-js';
+import Particles from 'reactparticles.js'
 
-class Login extends Component {
+class Login extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -15,41 +14,37 @@ class Login extends Component {
     }
   }
 
-
   handleSubmit = (e) => {
     // e.preventDefault()
-    // console.log(this.state.username, this.state.password)
     console.log('登录成功')
     sessionStorage.setItem('blogUser', '黄小心')
     sessionStorage.setItem('menuItemKey', '0')
-    this.props.history.push('/admin/page')
+    this.props.history.push('/web/index')
   }
 
-  render() {
+  render () {
     return (
       <div className="login">
-        <Particles/>
+        <Particles id="particles1" config="particles1.json" height="90%"/>
         <Card className="login-form" style={{width: 300, borderRadius: 4}}>
           <Form onFinish={this.handleSubmit}>
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: '请输入用户名!' }]}
-            >
-              <Input prefix={<UserOutlined style={{color: 'rgba(0, 0, 0, 0.25)'}} />} placeholder="请输入用户名" />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: '请输入密码!' }]}
-            >
-              <Input prefix={<LockOutlined style={{color: 'rgba(0, 0, 0, 0.25)'}} />} placeholder="请输入密码" />
+
+            <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
+              <Input prefix={<UserOutlined style={{color: 'rgba(0, 0, 0, .25)'}} />} placeholder="请输入用户名"/>
             </Form.Item>
 
-            <Button type="primary" htmlType="submit" className="login-form-button" block >login</Button>
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
+              <Input prefix={<LockOutlined style={{color: 'rgba(0, 0, 0, .25)'}} />} placeholder="请输入密码"/>
+            </Form.Item>
+
+            <Button type="primary" htmlType="submit" className="login-form-button" block>Log in</Button>
           </Form>
         </Card>
       </div>
-    );
+    )
   }
 }
 
-export default Login;
+// const Login = Form.create({ name: 'normal_login'})(login)
+
+export default Login
