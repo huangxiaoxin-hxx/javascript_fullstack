@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import Demo1 from './component/demo1/indexHook'
+import Demo1 from './component/useEffect/makeUnmount'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Demo1 />, document.getElementById('root'));
