@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import Demo1 from './component/useMemo'
+import Demo1 from './component/useRef/anotherUse'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Demo1 />, document.getElementById('root'));
