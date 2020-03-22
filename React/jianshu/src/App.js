@@ -4,6 +4,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './pages/home'
+import Detail from './pages/detail'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Home}></Route>
+          <Route exact path="/detail" component={Detail}></Route>
         </div>
       </BrowserRouter>
     </Provider>
