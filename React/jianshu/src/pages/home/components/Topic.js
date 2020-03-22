@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-  TopicWrapper,
-  TopicItem
-} from '../style.js'
+import { TopicWrapper, TopicItem } from '../style'
 
 class Topic extends Component {
   render() {
@@ -19,22 +16,14 @@ class Topic extends Component {
             )
           })
         }
-
       </TopicWrapper>
-    );
+    )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    list: state.home.get('topicList')
-  }
-}
+const mapState = (state) => ({
+  list: state.home.get('topicList')
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topic);
+export default connect(mapState, null)(Topic)
