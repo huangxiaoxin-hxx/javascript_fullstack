@@ -4,6 +4,8 @@
 3. actionTypes 整合
 4. 使用 actionCreator 统一创建 action
 
+
+
 # 总结 redux的设计使用原则
 1. store 是唯一的
 2. 只有store能改变自己的内容
