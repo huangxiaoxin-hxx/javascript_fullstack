@@ -13,3 +13,4 @@ Promsie.race还有一个很重要的实际用处就是，有时候我们要去�
 `
   Promise.race([promise1,timeOutPromise(3000)]).then(res=>{})
 `
+- then 的执行总是在最后的
