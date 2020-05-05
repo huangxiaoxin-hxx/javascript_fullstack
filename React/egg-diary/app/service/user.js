@@ -6,7 +6,7 @@ class UserService extends Service {
   async user() {
     return {
       "title": "您贵姓",
-      "content": "免贵姓搞"
+      "content": "免贵姓黄"
     }
   }
 }

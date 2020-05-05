@@ -23,6 +23,26 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  exports.mysql = {
+    // database configuration
+    client: {
+      // host
+      host: 'localhost',
+      // port
+      port: '3306',
+      // username
+      user: 'root',
+      // password
+      password: '3232556hdy',
+      // database
+      database: 'diary',
+    },
+    // load into app, default is open
+    app: true,
+    // load into agent, default is close
+    agent: false,
+  };
+
   config.security = {
     csrf: {
       enable: false,
