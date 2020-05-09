@@ -7,3 +7,7 @@ const debounce = (fn, delay) => {
     },delay)
   }
 }
+
+const throtting = (fn, delay) => {
+  
+}
