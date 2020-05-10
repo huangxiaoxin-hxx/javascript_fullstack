@@ -55,3 +55,10 @@ WDS 不刷新浏览器
 WDS 不输出文件，而是放在内存中
 使用 HotModuleReplaceMentPlugin插件
 
+# 文件指纹
+
+打包后输出的文件名的后缀
+
+1. Hash: 和整个项目的构建相关，只要项目文件有修改，整个项目构建的 hash 值就会更改
+2. Chunkhash: 和 webpack 打包的 chunk 有关，不同的 entry 会生成不同的 chunkhash 值
+3. Contenthash: 根据文件内容来定义 hash，文件内容不变， 则 contenthash 不变

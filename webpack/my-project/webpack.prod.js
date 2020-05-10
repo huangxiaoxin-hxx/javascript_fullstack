@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: {
@@ -10,9 +10,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname,'dist'),
-    filename: '[name].js'
+    filename: '[name]_[chunkhash:8].js'
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -23,14 +23,16 @@ module.exports = {
       {
         test: /.css$/,
         use: [  // 链式调用 顺序从右到左
-          'style-loader',  // 将样式通过 <style> 标签插入到head中
+          MiniCssExtractPlugin.loader, // 与 style-loader 互斥
+          // 'style-loader',  // 将样式通过 <style> 标签插入到head中
           'css-loader'  // 用于加载 .css 文件，并转换成commonjs对象
         ]
       },
       {
         test: /.less$/,
         use: [  // 链式调用 顺序从右到左
-          'style-loader',  // 将样式通过 <style> 标签插入到head中
+          MiniCssExtractPlugin.loader, // 与 style-loader 互斥
+          // 'style-loader',  // 将样式通过 <style> 标签插入到head中
           'css-loader',  // 用于加载 .css 文件，并转换成commonjs对象
           'less-loader', // 增加less的解析
         ]
@@ -42,7 +44,8 @@ module.exports = {
           {
             loader: 'url-loader', // 可以解析图片和字体，设置较小文件问base64格式
             options: {
-              limit: 10240
+              limit: 10240,
+              name: '[name]_[hash:8].[ext]'
             }
           }
         ]
@@ -50,10 +53,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  }
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash:8].css'
+    })
+  ]
 }
